@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+from weapon import * 
 
 class Personnage:
     def __init__(    self, 
@@ -15,7 +16,10 @@ class Personnage:
             'potion' : [],
             'objet'  : []
         }
-
+        
+    def prendre_arme(self, arme):
+        self.sac['weapon'].append(arme)
+    
     def affiche_etat(self):
         table = PrettyTable()
         table.field_names = ["name", 
@@ -29,8 +33,9 @@ class Personnage:
                       )
         print("\n",table,"\n")
         
-        
     def attaquer(self,player):
+        weapon_atk = [arme for arme in self.sac['weapon'] if arme.genre == "_ATK_" ]
+        bonus = max([ ])
         print(f"\n {self.name}!! Attaque !! {player.name}\n")
         if player.defense > 0 :
             player.defense -= self.force 
@@ -55,12 +60,4 @@ class Personnage:
     def mourir(self):
         self.sante = 0 
         print(f" Player {self.name} est mort !!!!!! ")
-    
-    
-    
-class Arme:
-    def __init__(self,name="Arme",type="DEF",power=0):
-        self.name  = name 
-        self.type  = type
-        self.power = power
     
